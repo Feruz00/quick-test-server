@@ -1,0 +1,39 @@
+{
+  "name": "quick-test server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "reset": "npx sequelize-cli db:drop  && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@socket.io/redis-adapter": "^8.3.0",
+    "bullmq": "^5.70.1",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dayjs": "^1.11.19",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "ioredis": "^5.10.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.17.2",
+    "rate-limit-redis": "^4.3.1",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.5",
+    "socket.io": "^4.8.3",
+    "uuid": "^13.0.0",
+    "xss": "^1.0.15"
+  }
+}
