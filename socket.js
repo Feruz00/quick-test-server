@@ -19,7 +19,19 @@ async function initializeSocket(server) {
 
   const subClient = pubClient.duplicate();
 
-  io.adapter(createAdapter(pubClient, subClient));
+  try {
+    await Promise.all([pubClient.connect(), subClient.connect()]);
+
+    console.log('✅ Redis clients connected');
+
+    io.adapter(createAdapter(pubClient, subClient));
+
+    console.log('✅ Socket.io Redis adapter enabled');
+  } catch (err) {
+    console.error('❌ Redis adapter failed:', err);
+  }
+
+  // io.adapter(createAdapter(pubClient, subClient));
 
   console.log('✅ Socket.io Redis adapter enabled');
 
