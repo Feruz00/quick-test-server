@@ -30,6 +30,7 @@
     "morgan": "^1.10.1",
     "mysql2": "^3.17.2",
     "rate-limit-redis": "^4.3.1",
+    "redis": "^5.11.0",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.5",
     "socket.io": "^4.8.3",
