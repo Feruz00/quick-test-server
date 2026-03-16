@@ -16,7 +16,7 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-app.set('trust proxy', false);
+app.enable('trust proxy');
 
 app.use(cookieParser());
 
