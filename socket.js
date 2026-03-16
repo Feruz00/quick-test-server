@@ -10,8 +10,10 @@ async function initializeSocket(server) {
     cors: {
       origin: '*',
       methods: ['GET', 'POST'],
+      transports: ['websocket', 'polling'],
       credentials: true,
     },
+    allowEIO3: true,
   });
 
   const pubClient = createClient({
