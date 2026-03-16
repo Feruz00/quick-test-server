@@ -15,7 +15,19 @@ async function startServer() {
     await db.sequelize.authenticate();
     console.log('✅ Database connected successfully.');
 
-    initializeSocket(server);
+    const io = await initializeSocket(server);
+    io.on('connection', async (socket) => {
+      const userId = socket.handshake.query.id;
+      const role = socket.handshake.query.role;
+      console.log(`User with ID ${role}-${userId} connected with ${socket.id}`);
+
+      socket.join(`${role}-${userId}`);
+
+      socket.on('disconnect', () => {
+        console.log(`Client disconnected ${role}-${userId}: ${socket.id}`);
+      });
+    });
+
     require('./workers/worker');
     server.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server started on port ${PORT}`);
