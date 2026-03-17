@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'quiz-app',
       script: 'index.js',
-      instances: 4, // use all CPU cores
+      instances: 'max', // use all CPU cores
       exec_mode: 'cluster', // enable cluster mode
 
       env: {
