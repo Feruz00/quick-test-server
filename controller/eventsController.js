@@ -251,7 +251,7 @@ exports.joinEvent = catchAsync(async (req, res) => {
       expiresIn: '1d',
     }
   );
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('user', token, cookieOptions);
   const user = await participate.toJSON();
   user.role = 'participant';
   user.event = { join: event.join };
