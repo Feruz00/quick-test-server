@@ -26,7 +26,7 @@ const protect = catchAsync(async (req, res, next) => {
 
   // 2️⃣ No token
   if (!token) {
-    res.clearCookie('jwt', cookieOptions);
+    res.clearCookie('user', cookieOptions);
 
     return next(
       new AppError('You are not logged in! Please log in to get access.', 401)
@@ -38,7 +38,7 @@ const protect = catchAsync(async (req, res, next) => {
   try {
     decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   } catch (err) {
-    res.clearCookie('jwt', cookieOptions);
+    res.clearCookie('user', cookieOptions);
 
     return next(
       new AppError('Token is invalid or expired. Please login again.', 401)
@@ -57,12 +57,12 @@ const protect = catchAsync(async (req, res, next) => {
     currentUser = await currentUser.toJSON();
     currentUser.role = 'participant';
   } else {
-    res.clearCookie('jwt', cookieOptions);
+    res.clearCookie('user', cookieOptions);
     return next(new AppError('Invalid token type. Please login again.', 401));
   }
 
   if (!currentUser) {
-    res.clearCookie('jwt', cookieOptions);
+    res.clearCookie('user', cookieOptions);
 
     return next(
       new AppError('The user belonging to this token no longer exists.', 401)

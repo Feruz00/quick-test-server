@@ -41,7 +41,7 @@ exports.loginUser = catchAsync(async (req, res) => {
     }
   );
 
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('user', token, cookieOptions);
   const userData = await user.toJSON();
   delete userData.password;
   res.status(200).json({
@@ -55,7 +55,7 @@ exports.loginUser = catchAsync(async (req, res) => {
  * LOGOUT
  */
 exports.logoutUser = catchAsync(async (req, res) => {
-  res.cookie('jwt', '', {
+  res.cookie('user', '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
