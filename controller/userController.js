@@ -129,7 +129,13 @@ exports.updateUser = catchAsync(async (req, res) => {
       message: 'You cannot update own information',
     });
   }
-  await user.update(req.body);
+  const { password, ...others } = req.body;
+  let newUpdate = { ...others };
+  if (password) {
+    const newPassword = await toHash(password);
+    newUpdate.password = newPassword;
+  }
+  await user.update(newUpdate);
 
   res.status(200).json({
     status: 'success',
